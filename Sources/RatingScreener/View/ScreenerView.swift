@@ -20,64 +20,60 @@ public struct ScreenerView: View {
     }
     
     public var body: some View {
-        Button(action: {
-            close?()
-        }, label: {
-            ZStack {
-                VStack(spacing: 10) {
-                    Image(.thumbUp)
-                    Text("How would you rate us?")
-                        .modifier(H2())
-                    HStack {
-                        Button(action: {
-                            starTapped(count: 1)
-                        }, label: {
-                            Image(starCount ?? 0 > 0 ? .starSelected : .starUnselected)
-                        })
-                        Button(action: {
-                            starTapped(count: 2)
-                        }, label: {
-                            Image(starCount ?? 0 > 1 ? .starSelected : .starUnselected)
-                        })
-                        Button(action: {
-                            starTapped(count: 3)
-                        }, label: {
-                            Image(starCount ?? 0 > 2 ? .starSelected : .starUnselected)
-                        })
-                        Button(action: {
-                            starTapped(count: 4)
-                        }, label: {
-                            Image(starCount ?? 0 > 3 ? .starSelected : .starUnselected)
-                        })
-                        Button(action: {
-                            starTapped(count: 5)
-                        }, label: {
-                            Image(starCount ?? 0 > 4 ? .starSelected : .starUnselected)
-                        })
-                    }
-                    .padding(.bottom, 8)
-                    let notNowButton = Button(action: {
-                        
+        ZStack {
+            VStack(spacing: 10) {
+                Image(.thumbUp)
+                Text("How would you rate us?")
+                    .modifier(H2())
+                HStack {
+                    Button(action: {
+                        starTapped(count: 1)
                     }, label: {
-                        Text("Not Now")
-                            .modifier(BodyModifier())
+                        Image(starCount ?? 0 > 0 ? .starSelected : .starUnselected)
                     })
-                    if #available(iOS 15, *) {
-                        notNowButton
-                            .tint(.white)
-                    } else {
-                        notNowButton
-                            .foregroundColor(.white)
-                    }
+                    Button(action: {
+                        starTapped(count: 2)
+                    }, label: {
+                        Image(starCount ?? 0 > 1 ? .starSelected : .starUnselected)
+                    })
+                    Button(action: {
+                        starTapped(count: 3)
+                    }, label: {
+                        Image(starCount ?? 0 > 2 ? .starSelected : .starUnselected)
+                    })
+                    Button(action: {
+                        starTapped(count: 4)
+                    }, label: {
+                        Image(starCount ?? 0 > 3 ? .starSelected : .starUnselected)
+                    })
+                    Button(action: {
+                        starTapped(count: 5)
+                    }, label: {
+                        Image(starCount ?? 0 > 4 ? .starSelected : .starUnselected)
+                    })
                 }
-                .padding(30)
-                .background(Color(.panel))
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .padding(.bottom, 8)
+                let notNowButton = Button(action: {
+                    
+                }, label: {
+                    Text("Not Now")
+                        .modifier(BodyModifier())
+                })
+                if #available(iOS 15, *) {
+                    notNowButton
+                        .tint(.white)
+                } else {
+                    notNowButton
+                        .foregroundColor(.white)
+                }
             }
-            .contentShape(Rectangle())
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.background))
-        })
+            .padding(30)
+            .background(Color(.panel))
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        }
+        .contentShape(Rectangle())
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.background))
         .edgesIgnoringSafeArea(.all)
     }
 }
