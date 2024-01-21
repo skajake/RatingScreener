@@ -23,6 +23,9 @@ public class RatingScreenerHost : UIHostingController<ScreenerView> {
         super.viewDidLoad()
         view.backgroundColor = .clear
         view.isOpaque = false
+        rootView.close = { [weak self] in
+            self?.dismiss(animated: true)
+        }
     }
     
 }

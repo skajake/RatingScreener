@@ -11,12 +11,18 @@ public struct ScreenerView: View {
     
     public init() {}
     
+    var close: (() -> Void)? = nil
+    
     public var body: some View {
-        ZStack {
-            Color.clear.edgesIgnoringSafeArea(.all)
+        Button(action: {
+            close?()
+        }, label: {
             Text("Test")
                 .background(Color.white)
-        }
+        })
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.green.opacity(0.3))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
@@ -25,5 +31,5 @@ public struct ScreenerView: View {
         ScreenerView()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(Color.red)
+    .background(Color.white)
 }
