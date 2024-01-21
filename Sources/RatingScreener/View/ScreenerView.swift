@@ -20,6 +20,7 @@ public struct ScreenerView: View {
             Text("Test")
                 .background(Color.white)
         })
+        .contentShape(Rectangle())
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.green.opacity(0.3))
         .edgesIgnoringSafeArea(.all)
