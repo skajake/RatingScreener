@@ -12,11 +12,11 @@ public struct ScreenerView: View {
     public init() {}
     
     public var body: some View {
-//        ZStack {
-//            Color.clear.edgesIgnoringSafeArea(.all)
+        ZStack {
+            Color.clear.edgesIgnoringSafeArea(.all)
             Text("Test")
-//                .background(Color.white)
-//        }
+                .background(Color.white)
+        }
     }
 }
 
