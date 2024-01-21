@@ -17,12 +17,14 @@ public struct ScreenerView: View {
         Button(action: {
             close?()
         }, label: {
-            Text("Test")
-                .background(Color.white)
+            ZStack {
+                Text("Test")
+                    .background(Color.white)
+            }
+            .contentShape(Rectangle())
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.green.opacity(0.3))
         })
-        .contentShape(Rectangle())
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.green.opacity(0.3))
         .edgesIgnoringSafeArea(.all)
     }
 }
