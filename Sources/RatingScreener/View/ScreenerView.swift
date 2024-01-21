@@ -56,13 +56,19 @@ public struct ScreenerView: View {
                         })
                     }
                     .padding(.bottom, 8)
-                    Button(action: {
+                    let notNowButton = Button(action: {
                         
                     }, label: {
                         Text("Not Now")
                             .modifier(BodyModifier())
                     })
-                    .tint(.white)
+                    if #available(iOS 15, *) {
+                        notNowButton
+                            .tint(.white)
+                    } else {
+                        notNowButton
+                            .foregroundColor(.white)
+                    }
                 }
                 .padding(30)
                 .background(Color(.panel))
