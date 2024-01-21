@@ -9,13 +9,18 @@ import SwiftUI
 
 public struct ScreenerView: View {
     
-    public init() {}
+    public init(starCount: Int? = nil) {
+        self.starCount = starCount
+    }
     
     @State var starCount: Int? = nil
     
     var close: (() -> Void)? = nil
     
     func starTapped(count: Int) {
+        guard starCount == nil else {
+            return
+        }
         starCount = count
     }
     
@@ -54,7 +59,7 @@ public struct ScreenerView: View {
                 }
                 .padding(.bottom, 8)
                 let notNowButton = Button(action: {
-                    
+                    close?()
                 }, label: {
                     Text("Not Now")
                         .modifier(BodyModifier())
@@ -76,6 +81,14 @@ public struct ScreenerView: View {
         .background(Color(.background))
         .edgesIgnoringSafeArea(.all)
     }
+}
+
+#Preview {
+    VStack {
+        ScreenerView()
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(Color.white)
 }
 
 #Preview {
