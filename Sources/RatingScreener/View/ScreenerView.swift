@@ -12,10 +12,18 @@ public struct ScreenerView: View {
     public init() {}
     
     public var body: some View {
-        Text("Test")
+        ZStack {
+            Color.clear.edgesIgnoringSafeArea(.all)
+            Text("Test")
+                .background(Color.white)
+        }
     }
 }
 
 #Preview {
-    ScreenerView()
+    VStack {
+        ScreenerView()
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(Color.red)
 }

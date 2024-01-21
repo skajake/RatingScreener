@@ -9,4 +9,9 @@ import SwiftUI
 
 public class RatingScreenerHost : UIHostingController<ScreenerView> {
     
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .clear
+    }
 }
