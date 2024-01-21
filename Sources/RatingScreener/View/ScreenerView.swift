@@ -18,12 +18,17 @@ public struct ScreenerView: View {
             close?()
         }, label: {
             ZStack {
-                Text("Test")
-                    .background(Color.white)
+                VStack(spacing: 0) {
+                    Text("How would you rate us?")
+                        .foregroundColor(Color.white)
+                        .padding(20)
+                }
+                .background(Color(.panel))
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             }
             .contentShape(Rectangle())
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.green.opacity(0.3))
+            .background(Color(.background))
         })
         .edgesIgnoringSafeArea(.all)
     }
