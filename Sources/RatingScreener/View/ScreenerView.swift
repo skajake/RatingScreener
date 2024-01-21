@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ScreenerView: View {
-    var body: some View {
+public struct ScreenerView: View {
+    public var body: some View {
         Text("Test")
     }
 }
