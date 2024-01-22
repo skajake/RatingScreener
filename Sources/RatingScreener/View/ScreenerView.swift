@@ -122,9 +122,13 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                                 .transparentScrolling()
                                 .modifier(TextFieldModifier())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .submitButton() {
-                                    feedback?(feedbackText)
-                                    close?()
+                                .keyboardType(.default)
+                                .submitButton()
+                                .onChange(of: feedbackText) { _ in
+                                    if !feedbackText.filter({ $0.isNewline }).isEmpty {
+                                        feedback?(feedbackText)
+                                        close?()
+                                    }
                                 }
                                 .padding(13)
                             Text("Write a comment (Optional)")
@@ -188,12 +192,9 @@ public extension View {
 }
 
 public extension View {
-    func submitButton(onSubmit: @escaping (() -> Void)) -> some View {
+    func submitButton() -> some View {
         if #available(iOS 16.0, *) {
             return submitLabel(.send)
-                .onSubmit {
-                    onSubmit()
-                }
         }
         return self
     }
