@@ -22,6 +22,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
     @State var textString: String = "How would you rate us?"
     @State var feedbackText: String = ""
     
+    var close: (() -> Void)? = nil
     var cancel: (() -> Void)? = nil
     var fiveStar: (() -> Void)? = nil
     var feedback: ((String) -> Void)? = nil
@@ -38,7 +39,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                 textString = "Thank you!"
                 fiveStar?()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    cancel?()
+                    close?()
                 }
             } else {
                 textString = "How can we improve the app experience?"

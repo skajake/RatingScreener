@@ -26,6 +26,9 @@ public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<Screen
         super.viewDidLoad()
         view.backgroundColor = .clear
         view.isOpaque = false
+        rootView.close = { [weak self] in
+            self?.dismiss(animated: true)
+        }
         rootView.cancel = { [weak self] in
             self?.dismiss(animated: true)
         }
