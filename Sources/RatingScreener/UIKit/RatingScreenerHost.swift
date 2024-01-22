@@ -15,8 +15,8 @@ public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<Screen
         view.isOpaque = false
     }
     
-    var fiveStar: (() -> Void)? = nil
-    var feedback: ((String) -> Void)? = nil
+    public var fiveStar: (() -> Void)? = nil
+    public var feedback: ((String) -> Void)? = nil
     
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
