@@ -154,14 +154,14 @@ public struct ScreenerView<Style: ButtonStyle>: View {
             .frame(maxWidth: 300)
             .fixedSize(horizontal: true, vertical: true)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .padding(.bottom, keyboardHeight)
             
         }
         .contentShape(Rectangle())
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.background))
         .edgesIgnoringSafeArea(.all)
-        .padding(.bottom, keyboardHeight)
-        .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
+        .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 / 2.0 }
     }
 }
 
