@@ -34,11 +34,9 @@ public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<Screen
         }
         rootView.fiveStar = { [weak self] in
             self?.fiveStar?()
-            self?.dismiss(animated: true)
         }
         rootView.feedback = { [weak self] feedback in
             self?.feedback?(feedback)
-            self?.dismiss(animated: true)
         }
     }
     

@@ -132,6 +132,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                         Button {
                             feedback?(feedbackText)
+                            close?()
                         } label: {
                             Text("Submit")
                                 .padding(.vertical, 14)
