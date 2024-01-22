@@ -130,12 +130,12 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                                         close?()
                                     }
                                 }
-                                .padding(13)
+                                .padding(10)
                             Text("Write a comment (Optional)")
                                 .modifier(TextFieldModifier())
                                 .foregroundColor(.black.opacity(0.25))
-                                .padding(14)
-                                .padding(.top, 0)
+                                .padding(15)
+                                .padding(.top, 3)
                                 .hidden(!feedbackText.isEmpty)
                                 .allowsHitTesting(false)
                         }
