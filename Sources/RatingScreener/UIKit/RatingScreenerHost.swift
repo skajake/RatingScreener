@@ -15,6 +15,9 @@ public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<Screen
         view.isOpaque = false
     }
     
+    var fiveStar: (() -> Void)? = nil
+    var feedback: ((String) -> Void)? = nil
+    
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -23,7 +26,15 @@ public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<Screen
         super.viewDidLoad()
         view.backgroundColor = .clear
         view.isOpaque = false
-        rootView.close = { [weak self] in
+        rootView.cancel = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        rootView.fiveStar = { [weak self] in
+            self?.fiveStar?()
+            self?.dismiss(animated: true)
+        }
+        rootView.feedback = { [weak self] feedback in
+            self?.feedback?(feedback)
             self?.dismiss(animated: true)
         }
     }

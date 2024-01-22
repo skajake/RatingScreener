@@ -22,7 +22,9 @@ public struct ScreenerView<Style: ButtonStyle>: View {
     @State var textString: String = "How would you rate us?"
     @State var feedbackText: String = ""
     
-    var close: (() -> Void)? = nil
+    var cancel: (() -> Void)? = nil
+    var fiveStar: (() -> Void)? = nil
+    var feedback: ((String) -> Void)? = nil
     
     func starTapped(count: Int) {
         guard starCount == nil else {
@@ -34,7 +36,10 @@ public struct ScreenerView<Style: ButtonStyle>: View {
             starCount = count
             if count > 4 {
                 textString = "Thank you!"
-                //Start timer to close this
+                fiveStar?()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    cancel?()
+                }
             } else {
                 textString = "How can we improve the app experience?"
             }
@@ -92,7 +97,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                     .padding(.bottom, 8)
                     if starCount == nil {
                         let notNowButton = Button(action: {
-                            close?()
+                            cancel?()
                         }, label: {
                             Text("Not Now")
                                 .modifier(BodyModifier())
@@ -125,7 +130,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                         .background(Color(.textfield))
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                         Button {
-                            close?()
+                            feedback?(feedbackText)
                         } label: {
                             Text("Submit")
                                 .padding(.vertical, 14)
