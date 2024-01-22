@@ -58,6 +58,8 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                     Text(textString)
                         .modifier(H2())
                         .multilineTextAlignment(.center)
+                        .padding(.horizontal, 10)
+                        .padding(.top, starCount != nil && starCount ?? 0 < 5 ? 10 : 0)
                     HStack {
                         Button(action: {
                             starTapped(count: 1)
@@ -95,7 +97,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                         })
                         .disabled(starCount != nil)
                     }
-                    .padding(.bottom, 8)
+                    .padding(.horizontal, 10)
                     if starCount == nil {
                         let notNowButton = Button(action: {
                             cancel?()
@@ -103,6 +105,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                             Text("Not Now")
                                 .modifier(BodyModifier())
                         })
+                            .padding(.top, 10)
                         if #available(iOS 15, *) {
                             notNowButton
                                 .tint(.white)
@@ -121,15 +124,16 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                             Text("Write a comment (Optional)")
                                 .modifier(TextFieldModifier())
                                 .foregroundColor(.black.opacity(0.25))
-                                .padding(17)
-                                .padding(.top, 2)
+                                .padding(14)
+                                .padding(.top, 0)
                                 .hidden(!feedbackText.isEmpty)
                                 .allowsHitTesting(false)
                         }
-                        .frame(maxWidth: 240)
-                        .frame(height: 81)
+                        .frame(maxWidth: 300)
+                        .frame(height: 80)
                         .background(Color(.textfield))
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .padding(.top, 10)
                         Button {
                             feedback?(feedbackText)
                             close?()
@@ -142,7 +146,8 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                         .padding(.top, 8)
                     }
                 }
-                .padding(30)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 28)
             }
             .frame(maxWidth: 300)
             .fixedSize(horizontal: true, vertical: true)
