@@ -150,9 +150,10 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                         } label: {
                             Text("Submit")
                                 .padding(.vertical, 14)
-                                .frame(maxWidth: 240)
+                                .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(buttonStyle)
+                        .frame(maxWidth: .infinity)
                         .padding(.top, 8)
                     }
                 }
