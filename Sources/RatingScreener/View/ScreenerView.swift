@@ -36,26 +36,31 @@ public struct ScreenerView: View {
                     }, label: {
                         Image(starCount ?? 0 > 0 ? .starSelected : .starUnselected)
                     })
+                    .disabled(starCount != nil)
                     Button(action: {
                         starTapped(count: 2)
                     }, label: {
                         Image(starCount ?? 0 > 1 ? .starSelected : .starUnselected)
                     })
+                    .disabled(starCount != nil)
                     Button(action: {
                         starTapped(count: 3)
                     }, label: {
                         Image(starCount ?? 0 > 2 ? .starSelected : .starUnselected)
                     })
+                    .disabled(starCount != nil)
                     Button(action: {
                         starTapped(count: 4)
                     }, label: {
                         Image(starCount ?? 0 > 3 ? .starSelected : .starUnselected)
                     })
+                    .disabled(starCount != nil)
                     Button(action: {
                         starTapped(count: 5)
                     }, label: {
                         Image(starCount ?? 0 > 4 ? .starSelected : .starUnselected)
                     })
+                    .disabled(starCount != nil)
                 }
                 .padding(.bottom, 8)
                 let notNowButton = Button(action: {
