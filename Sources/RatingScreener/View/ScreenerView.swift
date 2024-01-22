@@ -43,105 +43,116 @@ public struct ScreenerView<Style: ButtonStyle>: View {
     
     public var body: some View {
         ZStack {
-            VStack(spacing: 10) {
-                if starCount == nil || starCount ?? 0 > 4 {
-                    Image(.thumbUp)
-                }
-                Text(textString)
-                    .modifier(H2())
-                    .multilineTextAlignment(.center)
-                HStack {
-                    Button(action: {
-                        starTapped(count: 1)
-                    }, label: {
-                        Image(starCount ?? 0 > 0 ? .starSelected : .starUnselected)
-                            .foregroundColor(starColor)
-                    })
-                    .disabled(starCount != nil)
-                    Button(action: {
-                        starTapped(count: 2)
-                    }, label: {
-                        Image(starCount ?? 0 > 1 ? .starSelected : .starUnselected)
-                            .foregroundColor(starColor)
-                    })
-                    .disabled(starCount != nil)
-                    Button(action: {
-                        starTapped(count: 3)
-                    }, label: {
-                        Image(starCount ?? 0 > 2 ? .starSelected : .starUnselected)
-                            .foregroundColor(starColor)
-                    })
-                    .disabled(starCount != nil)
-                    Button(action: {
-                        starTapped(count: 4)
-                    }, label: {
-                        Image(starCount ?? 0 > 3 ? .starSelected : .starUnselected)
-                            .foregroundColor(starColor)
-                    })
-                    .disabled(starCount != nil)
-                    Button(action: {
-                        starTapped(count: 5)
-                    }, label: {
-                        Image(starCount ?? 0 > 4 ? .starSelected : .starUnselected)
-                            .foregroundColor(starColor)
-                    })
-                    .disabled(starCount != nil)
-                }
-                .padding(.bottom, 8)
-                if starCount == nil {
-                    let notNowButton = Button(action: {
-                        close?()
-                    }, label: {
-                        Text("Not Now")
-                            .modifier(BodyModifier())
-                    })
-                    if #available(iOS 15, *) {
-                        notNowButton
-                            .tint(.white)
-                    } else {
-                        notNowButton
-                            .foregroundColor(.white)
+            ZStack {
+                VisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
+                VStack(spacing: 10) {
+                    if starCount == nil || starCount ?? 0 > 4 {
+                        Image(.thumbUp)
+                    }
+                    Text(textString)
+                        .modifier(H2())
+                        .multilineTextAlignment(.center)
+                    HStack {
+                        Button(action: {
+                            starTapped(count: 1)
+                        }, label: {
+                            Image(starCount ?? 0 > 0 ? .starSelected : .starUnselected)
+                                .foregroundColor(starColor)
+                        })
+                        .disabled(starCount != nil)
+                        Button(action: {
+                            starTapped(count: 2)
+                        }, label: {
+                            Image(starCount ?? 0 > 1 ? .starSelected : .starUnselected)
+                                .foregroundColor(starColor)
+                        })
+                        .disabled(starCount != nil)
+                        Button(action: {
+                            starTapped(count: 3)
+                        }, label: {
+                            Image(starCount ?? 0 > 2 ? .starSelected : .starUnselected)
+                                .foregroundColor(starColor)
+                        })
+                        .disabled(starCount != nil)
+                        Button(action: {
+                            starTapped(count: 4)
+                        }, label: {
+                            Image(starCount ?? 0 > 3 ? .starSelected : .starUnselected)
+                                .foregroundColor(starColor)
+                        })
+                        .disabled(starCount != nil)
+                        Button(action: {
+                            starTapped(count: 5)
+                        }, label: {
+                            Image(starCount ?? 0 > 4 ? .starSelected : .starUnselected)
+                                .foregroundColor(starColor)
+                        })
+                        .disabled(starCount != nil)
+                    }
+                    .padding(.bottom, 8)
+                    if starCount == nil {
+                        let notNowButton = Button(action: {
+                            close?()
+                        }, label: {
+                            Text("Not Now")
+                                .modifier(BodyModifier())
+                        })
+                        if #available(iOS 15, *) {
+                            notNowButton
+                                .tint(.white)
+                        } else {
+                            notNowButton
+                                .foregroundColor(.white)
+                        }
+                    }
+                    if starCount != nil && starCount ?? 0 <= 4 {
+                        ZStack(alignment: .topLeading) {
+                            TextEditor(text: $feedbackText)
+                                .transparentScrolling()
+                                .modifier(TextFieldModifier())
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .padding(13)
+                            Text("Write a comment (Optional)")
+                                .modifier(TextFieldModifier())
+                                .foregroundColor(.black.opacity(0.25))
+                                .padding(17)
+                                .padding(.top, 2)
+                                .hidden(!feedbackText.isEmpty)
+                                .allowsHitTesting(false)
+                        }
+                        .frame(maxWidth: 240)
+                        .frame(height: 81)
+                        .background(Color(.textfield))
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        Button {
+                            close?()
+                        } label: {
+                            Text("Submit")
+                                .padding(.vertical, 14)
+                                .frame(maxWidth: 240)
+                        }
+                        .buttonStyle(buttonStyle)
+                        .padding(.top, 8)
                     }
                 }
-                if starCount != nil && starCount ?? 0 <= 4 {
-                    ZStack(alignment: .topLeading) {
-                        TextEditor(text: $feedbackText)
-                            .transparentScrolling()
-                            .modifier(TextFieldModifier())
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .padding(13)
-                        Text("Write a comment (Optional)")
-                            .modifier(TextFieldModifier())
-                            .foregroundColor(.black.opacity(0.25))
-                            .padding(17)
-                            .padding(.top, 2)
-                            .hidden(!feedbackText.isEmpty)
-                            .allowsHitTesting(false)
-                    }
-                    .frame(maxWidth: 240, maxHeight: 81)
-                    .background(Color(.textfield))
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    Button {
-                        close?()
-                    } label: {
-                        Text("Submit")
-                            .padding(.vertical, 14)
-                            .frame(maxWidth: 240)
-                    }
-                    .buttonStyle(buttonStyle)
-                    .frame(maxWidth: 240)
-                    .padding(.top, 8)
-                }
+                .padding(30)
             }
-            .padding(30)
-            .background(Color(.panel))
+            .frame(maxWidth: 300)
+            .fixedSize(horizontal: true, vertical: true)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            
         }
         .contentShape(Rectangle())
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.background))
         .edgesIgnoringSafeArea(.all)
     }
+}
+
+public struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    public func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    public func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }
 
 public extension View {
