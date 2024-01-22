@@ -10,15 +10,12 @@ import SwiftUI
 let pressedScale = 0.96
 
 public struct TestButtonStyle: ButtonStyle {
-//    @Binding var isPressed: Bool
-//    @Binding var isEnabled: Bool
     @State var isPressed = false
     @State var height: CGFloat = 50
     @State var fillWidth: Bool = true
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .modifier(ButtonMainLabel())
-            .frame(maxWidth: .infinity)
             .padding(.horizontal, 10)
             .frame(height:height)
             .background(

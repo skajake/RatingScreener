@@ -126,6 +126,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                     } label: {
                         Text("Submit")
                             .padding(.vertical, 14)
+                            .frame(maxWidth: 240)
                     }
                     .buttonStyle(buttonStyle)
                     .frame(maxWidth: 240)
