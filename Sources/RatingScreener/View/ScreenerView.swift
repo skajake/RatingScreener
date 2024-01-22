@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 public struct ScreenerView<Style: ButtonStyle>: View {
     
@@ -21,6 +22,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
     @State var starCount: Int? = nil
     @State var textString: String = "How would you rate us?"
     @State var feedbackText: String = ""
+    @State private var keyboardHeight: CGFloat = 0
     
     var close: (() -> Void)? = nil
     var cancel: (() -> Void)? = nil
@@ -158,6 +160,8 @@ public struct ScreenerView<Style: ButtonStyle>: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.background))
         .edgesIgnoringSafeArea(.all)
+        .padding(.bottom, keyboardHeight)
+        .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
     }
 }
 
