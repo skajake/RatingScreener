@@ -10,9 +10,11 @@ import SwiftUI
 public struct ScreenerView<Style: ButtonStyle>: View {
     
     let buttonStyle: Style
+    let starColor: Color
     
-    public init(starCount: Int? = nil, buttonStyle: Style) {
+    public init(starCount: Int? = nil, buttonStyle: Style, starColor: Color) {
         self.buttonStyle = buttonStyle
+        self.starColor = starColor
         self.starCount = starCount
     }
     
@@ -53,30 +55,35 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                         starTapped(count: 1)
                     }, label: {
                         Image(starCount ?? 0 > 0 ? .starSelected : .starUnselected)
+                            .foregroundColor(starColor)
                     })
                     .disabled(starCount != nil)
                     Button(action: {
                         starTapped(count: 2)
                     }, label: {
                         Image(starCount ?? 0 > 1 ? .starSelected : .starUnselected)
+                            .foregroundColor(starColor)
                     })
                     .disabled(starCount != nil)
                     Button(action: {
                         starTapped(count: 3)
                     }, label: {
                         Image(starCount ?? 0 > 2 ? .starSelected : .starUnselected)
+                            .foregroundColor(starColor)
                     })
                     .disabled(starCount != nil)
                     Button(action: {
                         starTapped(count: 4)
                     }, label: {
                         Image(starCount ?? 0 > 3 ? .starSelected : .starUnselected)
+                            .foregroundColor(starColor)
                     })
                     .disabled(starCount != nil)
                     Button(action: {
                         starTapped(count: 5)
                     }, label: {
                         Image(starCount ?? 0 > 4 ? .starSelected : .starUnselected)
+                            .foregroundColor(starColor)
                     })
                     .disabled(starCount != nil)
                 }
@@ -118,9 +125,11 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                         close?()
                     } label: {
                         Text("Submit")
+                            .padding(.vertical, 14)
                     }
                     .buttonStyle(buttonStyle)
                     .frame(maxWidth: 240)
+                    .padding(.top, 8)
                 }
             }
             .padding(30)
@@ -157,7 +166,7 @@ extension View {
 
 #Preview {
     VStack {
-        ScreenerView(buttonStyle: TestButtonStyle())
+        ScreenerView(buttonStyle: TestButtonStyle(), starColor: .blue)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.white)
