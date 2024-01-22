@@ -22,3 +22,21 @@ struct BodyModifier: ViewModifier {
             .foregroundColor(.white)
     }
 }
+
+struct TextFieldModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 14, weight: .regular))
+            .foregroundColor(.white)
+    }
+}
+
+struct ButtonMainLabel: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.white)
+            .modifier(H2())
+            .padding(.vertical, 12.5)
+            .padding(.horizontal, 16.0)
+    }
+}
