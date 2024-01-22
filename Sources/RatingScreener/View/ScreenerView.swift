@@ -50,7 +50,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
     }
     
     public var body: some View {
-        VStack {
+        ZStack {
             ZStack {
                 VisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
                 VStack(spacing: 10) {
