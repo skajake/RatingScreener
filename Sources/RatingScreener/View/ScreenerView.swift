@@ -122,12 +122,16 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                                 .transparentScrolling()
                                 .modifier(TextFieldModifier())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .submitButton() {
+                                    feedback?(feedbackText)
+                                    close?()
+                                }
                                 .padding(13)
                             Text("Write a comment (Optional)")
                                 .modifier(TextFieldModifier())
                                 .foregroundColor(.black.opacity(0.25))
-                                .padding(14)
-                                .padding(.top, 0)
+                                .padding(18)
+                                .padding(.top, 3)
                                 .hidden(!feedbackText.isEmpty)
                                 .allowsHitTesting(false)
                         }
@@ -180,6 +184,18 @@ public extension View {
                 UITextView.appearance().backgroundColor = .clear
             }
         }
+    }
+}
+
+public extension View {
+    func submitButton(onSubmit: @escaping (() -> Void)) -> some View {
+        if #available(iOS 16.0, *) {
+            return submitLabel(.send)
+                .onSubmit {
+                    onSubmit()
+                }
+        }
+        return self
     }
 }
 
