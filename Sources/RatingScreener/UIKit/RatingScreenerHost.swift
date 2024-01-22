@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-public class RatingScreenerHost : UIHostingController<ScreenerView> {
+public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<ScreenerView<Style>> {
     
-    public override init(rootView: ScreenerView) {
+    public override init(rootView: ScreenerView<Style>) {
         super.init(rootView: rootView)
         view.backgroundColor = .clear
         view.isOpaque = false

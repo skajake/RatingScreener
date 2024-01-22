@@ -34,7 +34,7 @@ struct TextFieldModifier: ViewModifier {
 struct ButtonMainLabel: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .foregroundColor(.white)
+            .foregroundColor(.purple)
             .modifier(H2())
             .padding(.vertical, 12.5)
             .padding(.horizontal, 16.0)

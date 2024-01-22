@@ -9,12 +9,13 @@ import SwiftUI
 
 let pressedScale = 0.96
 
-struct TestButtonStyle: ButtonStyle {
-    @Binding var isPressed: Bool
-    @Binding var isEnabled: Bool
+public struct TestButtonStyle: ButtonStyle {
+//    @Binding var isPressed: Bool
+//    @Binding var isEnabled: Bool
+    @State var isPressed = false
     @State var height: CGFloat = 50
     @State var fillWidth: Bool = true
-    func makeBody(configuration: Configuration) -> some View {
+    public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .modifier(ButtonMainLabel())
             .frame(maxWidth: .infinity)
@@ -22,7 +23,7 @@ struct TestButtonStyle: ButtonStyle {
             .frame(height:height)
             .background(
                 RoundedRectangle(cornerRadius: .infinity, style: .continuous)
-                    .fill(isEnabled ? (configuration.isPressed || isPressed ? Color.gray : Color.white) : Color("MainDisabled"))
+                    .fill(configuration.isPressed || isPressed ? Color.gray : Color.white)
                     .shadow(color: Color.gray, radius: 6, x: 0, y: 2))
             .animation(nil, value: configuration.isPressed || isPressed)
             .scaleEffect(configuration.isPressed || isPressed ? pressedScale : 1).animation(.linear(duration: 0.08), value: configuration.isPressed || isPressed ? pressedScale : 1)

@@ -7,9 +7,12 @@
 
 import SwiftUI
 
-public struct ScreenerView: View {
+public struct ScreenerView<Style: ButtonStyle>: View {
     
-    public init(starCount: Int? = nil) {
+    let buttonStyle: Style
+    
+    public init(starCount: Int? = nil, buttonStyle: Style) {
+        self.buttonStyle = buttonStyle
         self.starCount = starCount
     }
     
@@ -112,10 +115,12 @@ public struct ScreenerView: View {
                     .background(Color(.textfield))
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     Button {
-                        
+                        close?()
                     } label: {
                         Text("Submit")
                     }
+                    .buttonStyle(buttonStyle)
+                    .frame(maxWidth: 240)
                 }
             }
             .padding(30)
@@ -152,7 +157,7 @@ extension View {
 
 #Preview {
     VStack {
-        ScreenerView()
+        ScreenerView(buttonStyle: TestButtonStyle())
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.white)
