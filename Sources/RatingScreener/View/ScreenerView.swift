@@ -27,7 +27,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
     var close: (() -> Void)? = nil
     var cancel: (() -> Void)? = nil
     var fiveStar: (() -> Void)? = nil
-    var feedback: ((String) -> Void)? = nil
+    var feedback: ((Int, String) -> Void)? = nil
     
     func starTapped(count: Int) {
         guard starCount == nil else {
@@ -126,7 +126,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                                 .submitButton()
                                 .onChange(of: feedbackText) { _ in
                                     if !feedbackText.filter({ $0.isNewline }).isEmpty {
-                                        feedback?(feedbackText)
+                                        feedback?(starCount ?? 0, feedbackText)
                                         close?()
                                     }
                                 }
@@ -145,7 +145,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                         .padding(.top, 10)
                         Button {
-                            feedback?(feedbackText)
+                            feedback?(starCount ?? 0, feedbackText)
                             close?()
                         } label: {
                             Text("Submit")

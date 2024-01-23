@@ -16,7 +16,7 @@ public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<Screen
     }
     
     public var fiveStar: (() -> Void)? = nil
-    public var feedback: ((String) -> Void)? = nil
+    public var feedback: ((Int, String) -> Void)? = nil
     
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -35,8 +35,8 @@ public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<Screen
         rootView.fiveStar = { [weak self] in
             self?.fiveStar?()
         }
-        rootView.feedback = { [weak self] feedback in
-            self?.feedback?(feedback)
+        rootView.feedback = { [weak self] starCount, feedback in
+            self?.feedback?(starCount, feedback)
         }
     }
     
