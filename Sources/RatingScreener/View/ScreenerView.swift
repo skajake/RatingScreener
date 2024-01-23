@@ -135,7 +135,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                                 .modifier(TextFieldModifier())
                                 .foregroundColor(.black.opacity(0.25))
                                 .padding(15)
-                                .padding(.top, 3)
+                                .padding(.top, 0)
                                 .hidden(!feedbackText.isEmpty)
                                 .allowsHitTesting(false)
                         }
