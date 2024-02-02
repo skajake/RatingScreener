@@ -104,10 +104,15 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                         let notNowButton = Button(action: {
                             cancel?()
                         }, label: {
-                            Text("Not Now")
-                                .modifier(BodyModifier())
+                            VStack {
+                                Text("Not Now")
+                                    .modifier(BodyModifier())
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.top, 10)
+                                    .padding(.bottom, 28)
+                            }
+                            .contentShape(Rectangle())
                         })
-                            .padding(.top, 10)
                         if #available(iOS 15, *) {
                             notNowButton
                                 .tint(.white)
@@ -158,7 +163,8 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                     }
                 }
                 .padding(.horizontal, 18)
-                .padding(.vertical, 28)
+                .padding(.top, 28)
+                .padding(.bottom, starCount == nil ? 0 : 28)
             }
             .frame(maxWidth: 300)
             .fixedSize(horizontal: true, vertical: true)
