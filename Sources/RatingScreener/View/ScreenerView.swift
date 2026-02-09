@@ -167,7 +167,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
                 .padding(.bottom, starCount == nil ? 0 : 28)
             }
             .frame(maxWidth: 300)
-            .fixedSize(horizontal: true, vertical: true)
+            .fixedSize(horizontal: false, vertical: true)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             .padding(.bottom, keyboardHeight)
             
