@@ -24,7 +24,7 @@ public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<Screen
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if let superview = view.superview {
+        if !isBeingDismissed, let superview = view.superview {
             view.frame = superview.bounds
         }
     }
