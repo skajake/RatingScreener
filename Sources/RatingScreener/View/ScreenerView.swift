@@ -51,6 +51,8 @@ public struct ScreenerView<Style: ButtonStyle>: View {
     
     public var body: some View {
         ZStack {
+            Color(.background)
+                .edgesIgnoringSafeArea(.all)
             ZStack {
                 VisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
                 VStack(spacing: 10) {
@@ -173,8 +175,6 @@ public struct ScreenerView<Style: ButtonStyle>: View {
             
         }
         .contentShape(Rectangle())
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.background))
         .edgesIgnoringSafeArea(.all)
         .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 / 2.0 }
     }

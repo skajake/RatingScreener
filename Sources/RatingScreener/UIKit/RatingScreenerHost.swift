@@ -22,6 +22,13 @@ public class RatingScreenerHost<Style: ButtonStyle> : UIHostingController<Screen
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let superview = view.superview {
+            view.frame = superview.bounds
+        }
+    }
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
