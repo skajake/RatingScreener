@@ -20,7 +20,7 @@ let package = Package(
         .target(
             name: "RatingScreener",
             dependencies: [],
-            resources: [.copy("Assets.xcassets")],
+            resources: [.process("Assets.xcassets")],
             swiftSettings: [.define("ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS")]
         ),
         .testTarget(
