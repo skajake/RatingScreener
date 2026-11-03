@@ -49,12 +49,36 @@ public struct ScreenerView<Style: ButtonStyle>: View {
         }
     }
     
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+
+    /// Liquid Glass on iOS 26+ pairs with a larger corner radius; 20pt everywhere else.
+    private var panelCornerRadius: CGFloat {
+        if #available(iOS 26.0, *) {
+            return 28
+        }
+        return 20
+    }
+
+    /// The panel behind the content. The dark blur blended into dark screens behind the
+    /// dimmed backdrop, leaving the panel's edges hard to make out; Liquid Glass on iOS 26+
+    /// gives it a visible edge. Solid with Reduce Transparency on.
+    @ViewBuilder
+    private var panelBackground: some View {
+        if reduceTransparency {
+            Color.black
+        } else if #available(iOS 26.0, *) {
+            VisualEffectView(effect: UIGlassEffect(), cornerRadius: panelCornerRadius)
+        } else {
+            VisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
+        }
+    }
+
     public var body: some View {
         ZStack {
             Color(.background)
                 .edgesIgnoringSafeArea(.all)
             ZStack {
-                VisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
+                panelBackground
                 VStack(spacing: 10) {
                     if starCount == nil || starCount ?? 0 > 4 {
                         Image(.thumbUp)
@@ -170,7 +194,7 @@ public struct ScreenerView<Style: ButtonStyle>: View {
             }
             .frame(maxWidth: 300)
             .fixedSize(horizontal: false, vertical: true)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: panelCornerRadius, style: .continuous))
             .padding(.bottom, keyboardHeight)
             
         }
@@ -182,8 +206,16 @@ public struct ScreenerView<Style: ButtonStyle>: View {
 
 public struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
+    /// Glass draws its edge from the view's own corners, so it needs them set here rather
+    /// than only clipped by SwiftUI.
+    var cornerRadius: CGFloat = 0
     public func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
-    public func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+    public func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) {
+        uiView.effect = effect
+        uiView.layer.cornerRadius = cornerRadius
+        uiView.layer.cornerCurve = .continuous
+        uiView.clipsToBounds = cornerRadius > 0
+    }
 }
 
 public extension View {
